@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+string* addEntry(string *dynamicArray, int &size, string newEntry);
+string* deleteEntry(string *dynamicArray, int &size, string entryToDelete);
+int main()
+{
+	int size = 5;
+	string* arr = new string[size];
+	for (size_t i = 0; i < size; i++)
+	{
+		cin >> arr[i];
+	}
+	string word1, word2;
+	cin >> word1 >> word2;
+	arr = addEntry(arr, size, word1);
+	for (size_t i = 0; i < size; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+	arr = deleteEntry(arr, size, word2);
+	for (int i = 0; i < size; i++)
+	{	cout << arr[i] << " " ;
+	}
+	cout<<endl;
+
+
+}
+string* addEntry(string *dynamicArray, int &size, string newEntry)
+{
+	string* NewDyArr = new string[size + 1];
+	for (size_t i = 0; i < (size); i++)
+	{
+		NewDyArr[i] = dynamicArray[i];
+	}
+	NewDyArr[size] = newEntry;
+	size++;
+	delete[] dynamicArray;
+	return NewDyArr;
+
+
+}
+string *deleteEntry(string *dynamicArray, int &size, string entryToDelete)
+{
+	int index;
+	string *newArray = new string[size - 1];
+	for (int i = 0; i < size-1; i++)
+	{
+		if (dynamicArray[i] != entryToDelete)
+			newArray[i] = dynamicArray[i];
+		else
+		{
+			index = i;
+			break;
+		}
+
+	}
+	for (size_t j = index; j < size - 1; j++)
+	{
+		newArray[j] = dynamicArray[j + 1];
+	}
+
+	size--;
+	delete[] dynamicArray;
+	return newArray;
+}
